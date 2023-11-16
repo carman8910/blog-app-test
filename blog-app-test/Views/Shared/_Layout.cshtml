@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Blog App Test</title>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <link href="/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary d-flex flex-row">
+        <div  class="flex-grow-1 p-3">
+            <h3 class="text-light">App Test</h3>
+        </div>
+        <div>
+            <a asp-controller="BlogEntry" asp-action="List" class="btn btn-secondary ms-4 me-4 float-end">
+                Articulos
+            </a>
+        </div>
+        
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>

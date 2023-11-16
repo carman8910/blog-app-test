@@ -1,0 +1,78 @@
+﻿@model BlogEntryListViewModel
+
+<style>
+    .article-line .article-expanded-content {
+        display: none;
+    }
+
+    .article-line.table-active .article-expanded-content {
+        display: contents;
+    }
+
+    .article-line.table-active .article-truncated-content {
+        display: none;
+    }
+</style>
+
+<div class="row mt-2">
+    <div class="col-md-12">
+        <form asp-action="List" method="post" role="form" class="d-flex">
+            <div class="d-flex flex-row bd-highlight">
+                <div class="d-flex flex-row p-2 bd-highlight">
+                    <input class="form-control mr-sm-2" name="searchKeyWord" type="search" value="@ViewBag.SearchKeyWord" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </div>
+                <div class="p-2 ms-auto bd-highlight">
+                    <a asp-controller="BlogEntry"
+                       asp-action="Publish"
+                       class="btn btn-primary float-end">
+                        Agregar Entrada
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-12">
+       
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Contenido</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr class="article-line">
+                        <td>@item.Title</td>
+                        <td>@item.Author</td>
+                        <td>
+                            <p class="article-truncated-content">
+                                @item.GetTruncatedContent(70)
+                            </p>
+                            <p class="article-expanded-content">
+                                @item.Content
+                            </p>
+                        </td>
+                        <td>@item.Created</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".article-line").click(function () {
+            $(this).addClass("table-active");
+
+            let $siblings = $(this).siblings();
+            $siblings.removeClass("table-active");
+        });
+    });
+</script>
